@@ -1,0 +1,77 @@
+body {
+    background-image: url('assets/bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: "Inter", sans-serif;
+    color: #e0e0e0;
+    font-size: 16px;
+}
+
+strong{
+    color: white;
+}
+
+.container {
+    margin-top: 40px;
+    margin-left: 80px;
+    margin-right: 80px;
+}
+
+.logo {
+    margin-bottom: 60px;
+}
+
+.logo img {
+    width: 200px;
+}
+
+h1 {
+    font-family: "Outfit", sans-serif;
+    font-size: 60px;
+    color: white;
+    font-weight: 400;
+    margin-bottom: 40px;
+    line-height: 0.8;
+}
+
+h2 {
+    font-family: "Outfit", sans-serif;
+    font-size: 30px;
+    color: #C2128D;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.details p {
+    margin-top: 8px;
+    margin-bottom: 40px;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+
+#promise {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 80px;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.buttonprocedi {
+    font-family: "Outfit", sans-serif;
+    padding: 0.8rem 3.3rem;
+    background: #00FFFF;
+    color: #0B113B;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 0 15px #00ffff;
+    cursor: pointer;
+    font-size: 16px;
+}
