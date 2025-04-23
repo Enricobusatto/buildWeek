@@ -97,3 +97,14 @@ const questions = [
       incorrect_answers: ["Python", "C", "Jakarta"],
     },
   ];
+
+  function fisherYates(domande) {
+    for (let i = domande.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [domande[i], domande[j]] = [domande[j], domande[i]];
+    }
+    return domande;
+  }
+  
+  const domandeMischiate = fisherYates(questions);
+  console.log(domandeMischiate);
