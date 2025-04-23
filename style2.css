@@ -34,7 +34,6 @@ h1 {
     padding: 10px;
     margin: 5px 0;
     border: none;
-    background: #555;
     color: white;
     cursor: pointer;
 }
@@ -44,11 +43,13 @@ h1 {
 }
 
 #next-button {
-    margin-top: 15px;
-    padding: 10px;
-    background: #ff6600;
-    color: white;
+    font-family: "Outfit", sans-serif;
+    padding: 0.8rem 3.3rem;
+    background: #00FFFF;
+    color: #0B113B;
+    font-weight: bold;
     border: none;
+    box-shadow: 0 0 15px #00ffff;
     cursor: pointer;
-    display: none;
+    font-size: 16px;
 }
