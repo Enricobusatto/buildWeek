@@ -64,7 +64,7 @@ ul li {
     align-items: center;
 }
 
-.buttonprocedi {
+.buttonprocedi:enabled {
     font-family: "Outfit", sans-serif;
     padding: 0.8rem 3.3rem;
     background: #00FFFF;
@@ -74,4 +74,16 @@ ul li {
     box-shadow: 0 0 15px #00ffff;
     cursor: pointer;
     font-size: 16px;
+}
+
+.buttonprocedi:disabled{
+    font-family: "Outfit", sans-serif;
+    padding: 0.8rem 3.3rem;
+    background: #899494;
+    color: #0B113B;
+    font-weight: bold;
+    border: none;
+    cursor: not-allowed;
+    font-size: 16px;
+
 }
