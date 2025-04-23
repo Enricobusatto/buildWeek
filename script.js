@@ -106,5 +106,14 @@ const questions = [
     return domande;
   }
   
-  const domandeMischiate = fisherYates(questions);
+  let domandeMischiate = fisherYates(questions);
   console.log(domandeMischiate);
+
+  function preparaRisposte(domanda) {
+    return fisherYates([
+      ...domanda.incorrect_answers,
+      domanda.correct_answer
+    ])
+  }
+
+  console.log(preparaRisposte(questions[0]))
