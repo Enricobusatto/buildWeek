@@ -8,13 +8,14 @@ body {
 }
 
 .quiz-container {
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    width: 400px;
+    margin-top: 40px;
+    margin-left: 80px;
+    margin-right: 80px;
 }
 
 .logo {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 60px;
 }
 
@@ -34,7 +35,7 @@ h1 {
     padding: 10px;
     margin: 5px 0;
     border: none;
-    color: white;
+    color: rgb(162, 61, 61);
     cursor: pointer;
 }
 
