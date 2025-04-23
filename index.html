@@ -34,34 +34,45 @@
         <div id="promise">
             <div class="checkbox">
                 <input type="checkbox" id="check" required>
-                <p>I promise to answer myself without help from anyone.</p>
+                <p>I promise to answer myself without help from anyone.<br></p> 
             </div>
+            
             <div>
-                <button class= "buttonprocedi" id="buttonprocedi" disabled>PROCEED</button>
+                <button class= "buttonprocedi" id="buttonprocedi">PROCEED</button>
             </div>
         </div>
+        <span style="margin-left: -7px; display: none;">&#9757;Click here!</span> 
 
     </div>
     <script> 
+
         const checkbox = document.getElementById("check")
+        const span = document.querySelector("span")
+        
         const proceed = document.getElementById("buttonprocedi")
     /*attivazione/disattivazione del bottone "PROCEED" in base alla checkbox*/
 
-        function attivaBottone() {
+    /* function attivaBottone() {
+        
          proceed.disabled = !checkbox.checked;
-        }
+        } */
+
         function vaiNextPagina() {
             if(checkbox.checked){
-              
+                console.log("checkbox checked")
                 window.location.href = "index2.html"
+            } else {
+                console.log("checkbox not checked")
+                span.style.display = "block"   
+                
             }
         }
-        checkbox.addEventListener("change", attivaBottone);
+     //   checkbox.addEventListener("change", attivaBottone);
         proceed.addEventListener("click", vaiNextPagina);
 
     </script>
 
-    <script src="script.js"></script>
+  <!--  <script src="script.js"></script>  -->
 </body>
 
 </html>

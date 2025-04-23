@@ -17,6 +17,11 @@ strong{
     margin-right: 80px;
 }
 
+#checkbox{
+    display:flex;
+    flex-direction: column;
+}
+
 .logo {
     margin-bottom: 60px;
 }
