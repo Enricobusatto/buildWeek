@@ -35,12 +35,13 @@ h1 {
     padding: 10px;
     margin: 5px 0;
     border: none;
-    color: rgb(162, 61, 61);
+    color: rgb(255, 255, 255);
     cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.312);
 }
 
 #answers-container button:hover {
-    background: #777;
+    background: #BE008C;
 }
 
 #next-button {
@@ -54,3 +55,7 @@ h1 {
     cursor: pointer;
     font-size: 16px;
 }
+.answer-button.selected {
+    background-color: #BE008C;
+    color: white;
+  }

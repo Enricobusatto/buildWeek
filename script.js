@@ -1,3 +1,15 @@
+const currentPage = window.location.pathname;
+
+if (currentPage.includes("index.html")) {
+  // Codice per la pagina 1
+  welcomePage();
+}
+
+if (currentPage.includes("index2.html")) {
+  // Codice per la pagina 2
+  initQuiz();
+}
+
 const questions = [
     {
       category: "Science: Computers",
@@ -98,22 +110,137 @@ const questions = [
     },
   ];
 
-  function fisherYates(domande) {
-    for (let i = domande.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [domande[i], domande[j]] = [domande[j], domande[i]];
+    //prova
+  function initQuiz(){
+    let score = 0;
+    let questionsAnswered = 0;
+    let currentQuestion = null;
+    let selectedAnswer = null;
+    const maxQuestions = 10;
+    const answerButtons = [
+      document.getElementById("answer1"),
+      document.getElementById("answer2"),
+      document.getElementById("answer3"),
+      document.getElementById("answer4"),
+    ];
+
+  //funzione per mostrare il punteggio finale
+    function loadRandomQuestion() {
+      if (questionsAnswered >= maxQuestions) {
+        showFinalScore(); //da fare
+        return;
+      }
+      selectedAnswer = null;
+
+      //seleziona una domanda casuale
+      currentQuestion = questions[Math.floor(Math.random() * questions.length)];
+      const questionText = document.getElementById("question-text");
+      questionText.textContent = currentQuestion.question;
+
+    //funzione per mescolare le risposte
+      const allAnswers = [currentQuestion.correct_answer, ...currentQuestion.incorrect_answers];
+      const shuffledAnswers = allAnswers.sort(() => Math.random() - 0.5);
+
+    //funzione per mostrare le risposte se 2 o 4 pulsanti
+      answerButtons.forEach((btn, i) => {
+        if (i < shuffledAnswers.length) {
+          btn.style.display = "inline-block";
+          btn.textContent = shuffledAnswers[i];
+          btn.classList.remove("selected");
+          btn.onclick = () => selectAnswer(btn);
+        } else {
+          btn.style.display = "none";
+          btn.onclick = null;
+        }
+      });
     }
-    return domande;
+
+    //funzione per aggiungere la classe selected al pulsante cliccato
+    function selectAnswer(button){
+      answerButtons.forEach(btn => btn.classList.remove("selected"));
+      button.classList.add("selected");
+      selectedAnswer = button.textContent;
+    } 
+    //funzione per il click del pulsante next e per controllare se è stata selezionata la risposta corretta
+    function nextQuestion() {
+      if (!selectedAnswer) {
+        alert("Seleziona una risposta prima di continuare!");
+        return;
+      }
+    
+      if (selectedAnswer === currentQuestion.correct_answer) {
+        score++;
+      }
+    
+      questionsAnswered++;
+      loadRandomQuestion();
+    }
+    //fa caricare la pagina e poi fa partire il quiz
+    window.addEventListener("DOMContentLoaded", loadRandomQuestion);
+
+    document.getElementById("next-button").addEventListener("click", nextQuestion);
+  }
+
+function welcomePage() {
+  //funzione per abilitare il pulsante Proceed e mostrare il messaggio se il flag non è selezionato
+  const checkbox = document.getElementById("check")
+  const span = document.querySelector("span")
+  const proceed = document.getElementById("buttonprocedi")
+
+  function vaiNextPagina() {
+      if(checkbox.checked){
+          console.log("checkbox checked")
+          window.location.href = "index2.html"
+      } else {
+          console.log("checkbox not checked")
+          span.style.display = "block"   
+          
+      }
   }
   
-  let domandeMischiate = fisherYates(questions);
-  console.log(domandeMischiate);
-
-  function preparaRisposte(domanda) {
-    return fisherYates([
-      ...domanda.incorrect_answers,
-      domanda.correct_answer
-    ])
+    //togliere il click here se checked è true
+  checkbox.addEventListener('change', function () {
+       if (checkbox.checked) {
+  span.style.display = "none";
   }
+  })  
 
-  console.log(preparaRisposte(questions[0]))
+  //checkbox.addEventListener("change", attivaBottone);
+  proceed.addEventListener("click", vaiNextPagina);
+
+
+//manca di fare in modo che una volta cliccata la risposta resta selezionata e se l'utente cambia deve cambiare la selezione a schermo
+//fare funzione punteggio finale showFinalScore() quindi collegamento con terza pagina html (nello score registriamo il punteggio finale)
+//fare il timer che allo scadere fa scattare la funzione nextQuestion (capire se l'alert può dare problemi)
+
+
+
+
+
+
+
+
+
+
+  // //funzione per mescolare le domande
+  // function fisherYates(domande) {
+  //   for (let i = domande.length - 1; i > 0; i--) {
+  //     const j = Math.floor(Math.random() * (i + 1));
+  //     [domande[i], domande[j]] = [domande[j], domande[i]];
+  //   }
+  //   return domande;
+  // }
+  
+  // let domandeMischiate = fisherYates(questions);
+  // console.log(domandeMischiate);
+
+  // function preparaRisposte(domanda) {
+  //   return fisherYates([
+  //     ...domanda.incorrect_answers,
+  //     domanda.correct_answer
+  //   ])
+  // }
+
+  // console.log(preparaRisposte(questions[0]))
+
+}
