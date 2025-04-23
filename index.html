@@ -37,26 +37,26 @@
                 <p>I promise to answer myself without help from anyone.</p>
             </div>
             <div>
-                <a href="index2.html"><button class= "buttonprocedi" id="buttonprocedi" disabled>PROCEED</button></a>
+                <button class= "buttonprocedi" id="buttonprocedi" disabled>PROCEED</button>
             </div>
         </div>
 
     </div>
-    <script>
+    <script> 
         const checkbox = document.getElementById("check")
         const proceed = document.getElementById("buttonprocedi")
-    
+    /*attivazione/disattivazione del bottone "PROCEED" in base alla checkbox*/
+
         function attivaBottone() {
          proceed.disabled = !checkbox.checked;
         }
         function vaiNextPagina() {
-            if(!checkbox.checked){
-                alert("You must accept the promise to proceed.")
-                return
-            } else {
+            if(checkbox.checked){
+              
                 window.location.href = "index2.html"
             }
-        }checkbox.addEventListener("change", attivaBottone);
+        }
+        checkbox.addEventListener("change", attivaBottone);
         proceed.addEventListener("click", vaiNextPagina);
 
     </script>
