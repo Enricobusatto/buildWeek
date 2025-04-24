@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina Esame</title>
     <link rel="stylesheet" href="style2.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
     <div class="quiz-container">
         <div class="logo">
@@ -22,8 +29,15 @@
                 <button class="answer-button" id="answer4">Risposta 4</button>
             </div>
         </div>
-        <button id="next-button">NEXT QUESTION</button>
+
+        <div id="next-question">
+            <button id="next-button">NEXT QUESTION</button>
+        </div>
+    </div>
+    <div id="question-count">
+        <p id="question-number"></p>
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>

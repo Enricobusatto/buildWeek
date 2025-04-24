@@ -131,6 +131,9 @@ const questions = [
         return;
       }
       selectedAnswer = null;
+      
+      //contatore domande
+      document.getElementById("question-number").textContent = `Question ${questionsAnswered + 1} / ${maxQuestions}`;
 
       //seleziona una domanda casuale
       currentQuestion = questions[Math.floor(Math.random() * questions.length)];
@@ -174,6 +177,7 @@ const questions = [
     
       questionsAnswered++;
       loadRandomQuestion();
+      
     }
     //fa caricare la pagina e poi fa partire il quiz
     window.addEventListener("DOMContentLoaded", loadRandomQuestion);
