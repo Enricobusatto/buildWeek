@@ -126,18 +126,17 @@ function initQuiz() {
 
   //funzione per mostrare il punteggio finale
 
-    function loadRandomQuestion() {
-      if (questionsAnswered >= maxQuestions) {
-        showFinalScore();  //DA FARE ********
-        return;
-      }
-      selectedAnswer = null;
-      
-      //contatore domande
-      document.getElementById("question-number").textContent = `Question ${questionsAnswered + 1} / ${maxQuestions}`;
+  function loadRandomQuestion() {
+    if (questionsAnswered >= maxQuestions) {
+      showFinalScore();  //DA FARE ********
+      return;
+    }
+    selectedAnswer = null;
 
-      //contatore domande
-      document.getElementById("question-number").textContent = `Question ${questionsAnswered + 1} / ${maxQuestions}`;
+
+    //contatore domande
+    document.getElementById("question-number").textContent = `Question ${questionsAnswered + 1} / ${maxQuestions}`;
+
 
 
     //seleziona una domanda casuale
@@ -181,12 +180,11 @@ function initQuiz() {
       score++;
     }
 
-    questionsAnswered++;
     countdownDuration = 30
     loadRandomQuestion();
 
-    
-    
+  
+
 
   }
   //fa caricare la pagina e poi fa partire il quiz
@@ -201,6 +199,7 @@ function initQuiz() {
     if (countdownDuration > -1) {
       countdownText.textContent = countdownDuration;
       countdownDuration--;
+
     } else {
       // countdownText.textContent = "Tempo scaduto!";
       clearInterval(countdown);
@@ -208,8 +207,12 @@ function initQuiz() {
     }
     if (countdownDuration == -1) {
       countdownDuration = 30
+      questionsAnswered++;
       loadRandomQuestion();
+
+
       const animation = document.getElementById('animTimer');
+
 
       // Rimuovi la classe e forzane il reflow per "resettare"
       animation.classList.remove('circle');
@@ -220,8 +223,11 @@ function initQuiz() {
       // Riaggiungi la classe
       animation.classList.add('circle');
     }
+
   }, 1000);
+
 }
+
 
 function welcomePage() {
   //funzione per abilitare il pulsante Proceed e mostrare il messaggio se il flag non è selezionato
@@ -252,9 +258,7 @@ function welcomePage() {
 
 
 
-  //manca di fare in modo che una volta cliccata la risposta resta selezionata e se l'utente cambia deve cambiare la selezione a schermo
   //fare funzione punteggio finale showFinalScore() quindi collegamento con terza pagina html (nello score registriamo il punteggio finale)
-  //fare il timer che allo scadere fa scattare la funzione nextQuestion (capire se l'alert può dare problemi)
 
 
 
