@@ -11,175 +11,205 @@ if (currentPage.includes("index2.html")) {
 }
 
 const questions = [
-    {
-      category: "Science: Computers",
-      type: "multiple",
-      difficulty: "easy",
-      question: "What does CPU stand for?",
-      correct_answer: "Central Processing Unit",
-      incorrect_answers: [
-        "Central Process Unit",
-        "Computer Personal Unit",
-        "Central Processor Unit",
-      ],
-    },
-    {
-      category: "Science: Computers",
-      type: "multiple",
-      difficulty: "easy",
-      question:
-        "In the programming language Java, which of these keywords would you put on a variable to make sure it doesn&#039;t get modified?",
-      correct_answer: "Final",
-      incorrect_answers: ["Static", "Private", "Public"],
-    },
-    {
-      category: "Science: Computers",
-      type: "boolean",
-      difficulty: "easy",
-      question: "The logo for Snapchat is a Bell.",
-      correct_answer: "False",
-      incorrect_answers: ["True"],
-    },
-    {
-      category: "Science: Computers",
-      type: "boolean",
-      difficulty: "easy",
-      question:
-        "Pointers were not used in the original C programming language; they were added later on in C++.",
-      correct_answer: "False",
-      incorrect_answers: ["True"],
-    },
-    {
-      category: "Science: Computers",
-      type: "multiple",
-      difficulty: "easy",
-      question:
-        "What is the most preferred image format used for logos in the Wikimedia database?",
-      correct_answer: ".svg",
-      incorrect_answers: [".png", ".jpeg", ".gif"],
-    },
-    {
-      category: "Science: Computers",
-      type: "multiple",
-      difficulty: "easy",
-      question: "In web design, what does CSS stand for?",
-      correct_answer: "Cascading Style Sheet",
-      incorrect_answers: [
-        "Counter Strike: Source",
-        "Corrective Style Sheet",
-        "Computer Style Sheet",
-      ],
-    },
-    {
-      category: "Science: Computers",
-      type: "multiple",
-      difficulty: "easy",
-      question:
-        "What is the code name for the mobile operating system Android 7.0?",
-      correct_answer: "Nougat",
-      incorrect_answers: [
-        "Ice Cream Sandwich",
-        "Jelly Bean",
-        "Marshmallow",
-      ],
-    },
-    {
-      category: "Science: Computers",
-      type: "multiple",
-      difficulty: "easy",
-      question: "On Twitter, what is the character limit for a Tweet?",
-      correct_answer: "140",
-      incorrect_answers: ["120", "160", "100"],
-    },
-    {
-      category: "Science: Computers",
-      type: "boolean",
-      difficulty: "easy",
-      question: "Linux was first created as an alternative to Windows XP.",
-      correct_answer: "False",
-      incorrect_answers: ["True"],
-    },
-    {
-      category: "Science: Computers",
-      type: "multiple",
-      difficulty: "easy",
-      question:
-        "Which programming language shares its name with an island in Indonesia?",
-      correct_answer: "Java",
-      incorrect_answers: ["Python", "C", "Jakarta"],
-    },
+  {
+    category: "Science: Computers",
+    type: "multiple",
+    difficulty: "easy",
+    question: "What does CPU stand for?",
+    correct_answer: "Central Processing Unit",
+    incorrect_answers: [
+      "Central Process Unit",
+      "Computer Personal Unit",
+      "Central Processor Unit",
+    ],
+  },
+  {
+    category: "Science: Computers",
+    type: "multiple",
+    difficulty: "easy",
+    question:
+      "In the programming language Java, which of these keywords would you put on a variable to make sure it doesn&#039;t get modified?",
+    correct_answer: "Final",
+    incorrect_answers: ["Static", "Private", "Public"],
+  },
+  {
+    category: "Science: Computers",
+    type: "boolean",
+    difficulty: "easy",
+    question: "The logo for Snapchat is a Bell.",
+    correct_answer: "False",
+    incorrect_answers: ["True"],
+  },
+  {
+    category: "Science: Computers",
+    type: "boolean",
+    difficulty: "easy",
+    question:
+      "Pointers were not used in the original C programming language; they were added later on in C++.",
+    correct_answer: "False",
+    incorrect_answers: ["True"],
+  },
+  {
+    category: "Science: Computers",
+    type: "multiple",
+    difficulty: "easy",
+    question:
+      "What is the most preferred image format used for logos in the Wikimedia database?",
+    correct_answer: ".svg",
+    incorrect_answers: [".png", ".jpeg", ".gif"],
+  },
+  {
+    category: "Science: Computers",
+    type: "multiple",
+    difficulty: "easy",
+    question: "In web design, what does CSS stand for?",
+    correct_answer: "Cascading Style Sheet",
+    incorrect_answers: [
+      "Counter Strike: Source",
+      "Corrective Style Sheet",
+      "Computer Style Sheet",
+    ],
+  },
+  {
+    category: "Science: Computers",
+    type: "multiple",
+    difficulty: "easy",
+    question:
+      "What is the code name for the mobile operating system Android 7.0?",
+    correct_answer: "Nougat",
+    incorrect_answers: [
+      "Ice Cream Sandwich",
+      "Jelly Bean",
+      "Marshmallow",
+    ],
+  },
+  {
+    category: "Science: Computers",
+    type: "multiple",
+    difficulty: "easy",
+    question: "On Twitter, what is the character limit for a Tweet?",
+    correct_answer: "140",
+    incorrect_answers: ["120", "160", "100"],
+  },
+  {
+    category: "Science: Computers",
+    type: "boolean",
+    difficulty: "easy",
+    question: "Linux was first created as an alternative to Windows XP.",
+    correct_answer: "False",
+    incorrect_answers: ["True"],
+  },
+  {
+    category: "Science: Computers",
+    type: "multiple",
+    difficulty: "easy",
+    question:
+      "Which programming language shares its name with an island in Indonesia?",
+    correct_answer: "Java",
+    incorrect_answers: ["Python", "C", "Jakarta"],
+  },
+];
+
+//prova
+function initQuiz() {
+  let score = 0;
+  let questionsAnswered = 0;
+  let currentQuestion = null;
+  let selectedAnswer = null;
+  const maxQuestions = 10;
+  const answerButtons = [
+    document.getElementById("answer1"),
+    document.getElementById("answer2"),
+    document.getElementById("answer3"),
+    document.getElementById("answer4"),
   ];
 
-    //prova
-  function initQuiz(){
-    let score = 0;
-    let questionsAnswered = 0;
-    let currentQuestion = null;
-    let selectedAnswer = null;
-    const maxQuestions = 10;
-    const answerButtons = [
-      document.getElementById("answer1"),
-      document.getElementById("answer2"),
-      document.getElementById("answer3"),
-      document.getElementById("answer4"),
-    ];
-
   //funzione per mostrare il punteggio finale
-    function loadRandomQuestion() {
-      if (questionsAnswered >= maxQuestions) {
-        showFinalScore();  //DA FARE ********
-        return;
-      }
-      selectedAnswer = null;
+  function loadRandomQuestion() {
+    if (questionsAnswered >= maxQuestions) {
+      showFinalScore();  //DA FARE ********
+      return;
+    }
+    selectedAnswer = null;
 
-      //seleziona una domanda casuale
-      currentQuestion = questions[Math.floor(Math.random() * questions.length)];
-      const questionText = document.getElementById("question-text");
-      questionText.textContent = currentQuestion.question;
+    //seleziona una domanda casuale
+    currentQuestion = questions[Math.floor(Math.random() * questions.length)];
+    const questionText = document.getElementById("question-text");
+    questionText.textContent = currentQuestion.question;
 
     //funzione per mescolare le risposte
-      const allAnswers = [currentQuestion.correct_answer, ...currentQuestion.incorrect_answers];
-      const shuffledAnswers = allAnswers.sort(() => Math.random() - 0.5);
+    const allAnswers = [currentQuestion.correct_answer, ...currentQuestion.incorrect_answers];
+    const shuffledAnswers = allAnswers.sort(() => Math.random() - 0.5);
 
     //funzione per mostrare le risposte se 2 o 4 pulsanti
-      answerButtons.forEach((btn, i) => {
-        if (i < shuffledAnswers.length) {
-          btn.style.display = "inline-block";
-          btn.textContent = shuffledAnswers[i];
-          btn.classList.remove("selected");
-          btn.onclick = () => selectAnswer(btn);
-        } else {
-          btn.style.display = "none";
-          btn.onclick = null;
-        }
-      });
-    }
-
-    //funzione per aggiungere la classe selected al pulsante cliccato
-    function selectAnswer(button){
-      answerButtons.forEach(btn => btn.classList.remove("selected"));
-      button.classList.add("selected");
-      selectedAnswer = button.textContent;
-    } 
-    //funzione per il click del pulsante next e per controllare se è stata selezionata la risposta corretta
-    function nextQuestion() {
-      if (!selectedAnswer) {
-        alert("Seleziona una risposta prima di continuare!");
-        return;
+    answerButtons.forEach((btn, i) => {
+      if (i < shuffledAnswers.length) {
+        btn.style.display = "inline-block";
+        btn.textContent = shuffledAnswers[i];
+        btn.classList.remove("selected");
+        btn.onclick = () => selectAnswer(btn);
+      } else {
+        btn.style.display = "none";
+        btn.onclick = null;
       }
-    
-      if (selectedAnswer === currentQuestion.correct_answer) {
-        score++;
-      }
-    
-      questionsAnswered++;
-      loadRandomQuestion();
-    }
-    //fa caricare la pagina e poi fa partire il quiz
-    window.addEventListener("DOMContentLoaded", loadRandomQuestion);
-
-    document.getElementById("next-button").addEventListener("click", nextQuestion);
+    });
   }
+
+  //funzione per aggiungere la classe selected al pulsante cliccato
+  function selectAnswer(button) {
+    answerButtons.forEach(btn => btn.classList.remove("selected"));
+    button.classList.add("selected");
+    selectedAnswer = button.textContent;
+  }
+  //funzione per il click del pulsante next e per controllare se è stata selezionata la risposta corretta
+  function nextQuestion() {
+    if (!selectedAnswer) {
+      alert("Seleziona una risposta prima di continuare!");
+      return;
+    }
+
+    if (selectedAnswer === currentQuestion.correct_answer) {
+      score++;
+    }
+
+    questionsAnswered++;
+    countdownDuration = 30
+    loadRandomQuestion();
+    
+    
+  }
+  //fa caricare la pagina e poi fa partire il quiz
+  window.addEventListener("DOMContentLoaded", loadRandomQuestion);
+
+  document.getElementById("next-button").addEventListener("click", nextQuestion);
+
+  //Script per animazione timer
+  let countdownDuration = 30
+  const countdownText = document.getElementById("countdown-text");
+  let countdown = setInterval(function () {
+    if (countdownDuration > -1) {
+      countdownText.textContent = countdownDuration;
+      countdownDuration--;
+    } else {
+      // countdownText.textContent = "Tempo scaduto!";
+      clearInterval(countdown);
+    }
+    if (countdownDuration == -1) {
+      countdownDuration = 30
+      loadRandomQuestion();
+      const animation = document.getElementById('animTimer');
+
+      // Rimuovi la classe e forzane il reflow per "resettare"
+      animation.classList.remove('circle');
+
+      // Forza il reflow
+      void animation.offsetWidth; // questo fa il "reset" effettivo
+
+      // Riaggiungi la classe
+      animation.classList.add('circle');
+    }
+  }, 1000);
+}
 
 function welcomePage() {
   //funzione per abilitare il pulsante Proceed e mostrare il messaggio se il flag non è selezionato
@@ -188,30 +218,31 @@ function welcomePage() {
   const proceed = document.getElementById("buttonprocedi")
 
   function vaiNextPagina() {
-      if(checkbox.checked){
-          console.log("checkbox checked")
-          window.location.href = "index2.html"
-      } else {
-          console.log("checkbox not checked")
-          span.style.display = "block"   
-          
-      }
+    if (checkbox.checked) {
+      console.log("checkbox checked")
+      window.location.href = "index2.html"
+    } else {
+      console.log("checkbox not checked")
+      span.style.display = "block"
+
+    }
   }
-  
-    //togliere il click here se checked è true
+
+  //togliere il click here se checked è true
   checkbox.addEventListener('change', function () {
-       if (checkbox.checked) {
-  span.style.display = "none";
-  }
-  })  
+    if (checkbox.checked) {
+      span.style.display = "none";
+    }
+  })
 
   //checkbox.addEventListener("change", attivaBottone);
   proceed.addEventListener("click", vaiNextPagina);
 
 
-//manca di fare in modo che una volta cliccata la risposta resta selezionata e se l'utente cambia deve cambiare la selezione a schermo
-//fare funzione punteggio finale showFinalScore() quindi collegamento con terza pagina html (nello score registriamo il punteggio finale)
-//fare il timer che allo scadere fa scattare la funzione nextQuestion (capire se l'alert può dare problemi)
+
+  //manca di fare in modo che una volta cliccata la risposta resta selezionata e se l'utente cambia deve cambiare la selezione a schermo
+  //fare funzione punteggio finale showFinalScore() quindi collegamento con terza pagina html (nello score registriamo il punteggio finale)
+  //fare il timer che allo scadere fa scattare la funzione nextQuestion (capire se l'alert può dare problemi)
 
 
 
@@ -230,7 +261,7 @@ function welcomePage() {
   //   }
   //   return domande;
   // }
-  
+
   // let domandeMischiate = fisherYates(questions);
   // console.log(domandeMischiate);
 
@@ -243,4 +274,7 @@ function welcomePage() {
 
   // console.log(preparaRisposte(questions[0]))
 
+
 }
+
+
