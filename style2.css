@@ -92,8 +92,21 @@ h1 {
     color: white;
 }
 
+#question-count{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-
+#question-number{
+    font-family: "Outfit", sans-serif;
+    color: #e0e0e0;
+    font-size: 16px;
+    letter-spacing: 2px;
+    margin-right: 10px;
+    margin-top: 50px;
+    text-transform: uppercase;
+}
 
 /*Css per timer*/
 
