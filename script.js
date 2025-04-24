@@ -125,12 +125,20 @@ function initQuiz() {
   ];
 
   //funzione per mostrare il punteggio finale
-  function loadRandomQuestion() {
-    if (questionsAnswered >= maxQuestions) {
-      showFinalScore();  //DA FARE ********
-      return;
-    }
-    selectedAnswer = null;
+
+    function loadRandomQuestion() {
+      if (questionsAnswered >= maxQuestions) {
+        showFinalScore();  //DA FARE ********
+        return;
+      }
+      selectedAnswer = null;
+      
+      //contatore domande
+      document.getElementById("question-number").textContent = `Question ${questionsAnswered + 1} / ${maxQuestions}`;
+
+      //contatore domande
+      document.getElementById("question-number").textContent = `Question ${questionsAnswered + 1} / ${maxQuestions}`;
+
 
     //seleziona una domanda casuale
     currentQuestion = questions[Math.floor(Math.random() * questions.length)];
@@ -142,6 +150,7 @@ function initQuiz() {
     const shuffledAnswers = allAnswers.sort(() => Math.random() - 0.5);
 
     //funzione per mostrare le risposte se 2 o 4 pulsanti
+
     answerButtons.forEach((btn, i) => {
       if (i < shuffledAnswers.length) {
         btn.style.display = "inline-block";
@@ -175,8 +184,10 @@ function initQuiz() {
     questionsAnswered++;
     countdownDuration = 30
     loadRandomQuestion();
+
     
     
+
   }
   //fa caricare la pagina e poi fa partire il quiz
   window.addEventListener("DOMContentLoaded", loadRandomQuestion);
@@ -193,6 +204,7 @@ function initQuiz() {
     } else {
       // countdownText.textContent = "Tempo scaduto!";
       clearInterval(countdown);
+
     }
     if (countdownDuration == -1) {
       countdownDuration = 30
