@@ -16,11 +16,12 @@ body {
 .logo {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 60px;
+    margin-bottom: 60px;   
 }
 
 .logo img {
     width: 200px;
+    object-fit: contain;
 }
 
 h1 {
@@ -85,10 +86,63 @@ h1 {
     font-size: 16px;
 }
 
-#question-count{
+
+.answer-button.selected {
+    background-color: #BE008C;
+    color: white;
+}
+
+
+
+
+/*Css per timer*/
+
+.countdown-container {
+
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+
+.countdown {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+    width: 100px;
+    height: 100px;
+    left: 0;
+    top: 0;
+}
+
+
+.circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 10px solid lightgray;
+    border-top: 10px solid green;
+    animation: countdown-animation 30s linear forwards;
+}
+
+@keyframes countdown-animation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.countdown-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: bold;
 }
 
 #question-number{
@@ -100,3 +154,4 @@ h1 {
     margin-top: 50px;
     text-transform: uppercase;
 }
+

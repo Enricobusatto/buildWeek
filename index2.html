@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
+<head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina Esame</title>
@@ -16,7 +19,14 @@
     <div class="quiz-container">
         <div class="logo">
             <img src="assets/epicode_logo.png" alt="EPICODE Logo">
-            <p>TIMER</p>
+            <!--Struttura HTML per timer -->
+            <div class="countdown-container">
+                <div class="countdown">
+                    <div id="animTimer" class="circle"></div>
+                    <div id="countdown-text" class="countdown-text">30</div>
+                </div>
+            </div>
+
         </div>
 
         <div id="question-container">
@@ -37,6 +47,8 @@
         <p id="question-number"></p>
     </div>
     <script src="script.js"></script>
+
+
 </body>
 
 </html>
