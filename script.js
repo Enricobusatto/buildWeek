@@ -127,7 +127,7 @@ const questions = [
   //funzione per mostrare il punteggio finale
     function loadRandomQuestion() {
       if (questionsAnswered >= maxQuestions) {
-        showFinalScore(); //da fare
+        showFinalScore();  //DA FARE ********
         return;
       }
       selectedAnswer = null;
