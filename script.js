@@ -156,8 +156,9 @@ const questions = [
           btn.onclick = null;
         }
       });
-    }
+    }  
 
+    
     //funzione per aggiungere la classe selected al pulsante cliccato
     function selectAnswer(button){
       answerButtons.forEach(btn => btn.classList.remove("selected"));
