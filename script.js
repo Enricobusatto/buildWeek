@@ -132,6 +132,9 @@ const questions = [
       }
       selectedAnswer = null;
 
+      //contatore domande
+      document.getElementById("question-number").textContent = `Question ${questionsAnswered + 1} / ${maxQuestions}`;
+
       //seleziona una domanda casuale
       currentQuestion = questions[Math.floor(Math.random() * questions.length)];
       const questionText = document.getElementById("question-text");
