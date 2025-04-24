@@ -127,7 +127,7 @@ function initQuiz() {
   //funzione per mostrare il punteggio finale
 
   function loadRandomQuestion() {
-    
+
     // Queste 4 righe qui sotto che riguardano il refresh dell'animazione del cerchio (la rotazione) le ho spostato qui dentro
     // in modo che l animazione riparte sia quando il timer finisce che quando si preme il pulsante per andare avanti con le domande.
     const animation = document.getElementById('animTimer');
@@ -232,9 +232,11 @@ function initQuiz() {
     const animation = document.getElementById('animTimer');
 
     if (countdownDuration > 10 && countdownDuration < 15) {
-    animation.style.borderTopColor = "orange"
+      animation.style.borderTopColor = "orange"
     } else if (countdownDuration < 10) {
       animation.style.borderTopColor = "red"
+    } else {
+      animation.style.borderTopColor = "green"
     }
 
   }, 1000);
