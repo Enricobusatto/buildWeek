@@ -127,6 +127,22 @@ function initQuiz() {
   //funzione per mostrare il punteggio finale
 
   function loadRandomQuestion() {
+    
+    // Queste 4 righe qui sotto che riguardano il refresh dell'animazione del cerchio (la rotazione) le ho spostato qui dentro
+    // in modo che l animazione riparte sia quando il timer finisce che quando si preme il pulsante per andare avanti con le domande.
+    const animation = document.getElementById('animTimer');
+
+
+    // Rimuovi la classe e forzane il reflow per "resettare"
+    animation.classList.remove('circle');
+
+    // Forza il reflow
+    void animation.offsetWidth; // questo fa il "reset" effettivo
+
+    // Riaggiungi la classe
+    animation.classList.add('circle');
+
+
     if (questionsAnswered >= maxQuestions) {
       showFinalScore();  //DA FARE ********
       return;
@@ -183,7 +199,7 @@ function initQuiz() {
     countdownDuration = 30
     loadRandomQuestion();
 
-  
+
 
 
   }
@@ -210,18 +226,15 @@ function initQuiz() {
       questionsAnswered++;
       loadRandomQuestion();
 
+    }
 
-      const animation = document.getElementById('animTimer');
+    // Questa parte di codice gestisce il cambio colore del cerchio del timer
+    const animation = document.getElementById('animTimer');
 
-
-      // Rimuovi la classe e forzane il reflow per "resettare"
-      animation.classList.remove('circle');
-
-      // Forza il reflow
-      void animation.offsetWidth; // questo fa il "reset" effettivo
-
-      // Riaggiungi la classe
-      animation.classList.add('circle');
+    if (countdownDuration > 10 && countdownDuration < 15) {
+    animation.style.borderTopColor = "orange"
+    } else if (countdownDuration < 10) {
+      animation.style.borderTopColor = "red"
     }
 
   }, 1000);
