@@ -1,4 +1,4 @@
-const currentPage = window.location.pathname;
+/*const currentPage = window.location.pathname;
 
 if (currentPage.includes("index.html")) {
   // Codice per la pagina 1
@@ -8,7 +8,7 @@ if (currentPage.includes("index.html")) {
 if (currentPage.includes("index2.html")) {
   // Codice per la pagina 2
   initQuiz();
-}
+}*/
 
 const questions = [
   {
@@ -109,6 +109,17 @@ const questions = [
     incorrect_answers: ["Python", "C", "Jakarta"],
   },
 ];
+const currentPage = window.location.pathname;
+
+if (currentPage.includes("index.html")) {
+  // Codice per la pagina 1
+  welcomePage();
+}
+
+if (currentPage.includes("index2.html")) {
+  // Codice per la pagina 2
+  initQuiz();
+}
 
 //prova
 function initQuiz() {
@@ -117,6 +128,8 @@ function initQuiz() {
   let currentQuestion = null;
   let selectedAnswer = null;
   const maxQuestions = 10;
+  let remainingQuestions = [...questions]; // copia modificabile 
+
   const answerButtons = [
     document.getElementById("answer1"),
     document.getElementById("answer2"),
@@ -156,7 +169,9 @@ function initQuiz() {
 
 
     //seleziona una domanda casuale
-    currentQuestion = questions[Math.floor(Math.random() * questions.length)];
+    let randomPick = Math.floor(Math.random() * remainingQuestions.length);
+    currentQuestion = remainingQuestions.splice(randomPick, 1)[0]; // rimuove la domanda usata
+
     const questionText = document.getElementById("question-text");
     questionText.textContent = currentQuestion.question;
 
@@ -195,6 +210,8 @@ function initQuiz() {
     if (selectedAnswer === currentQuestion.correct_answer) {
       score++;
     }
+
+    questionsAnswered++;
 
     countdownDuration = 30
     loadRandomQuestion();
