@@ -20,12 +20,15 @@
         </div>
         <div id="exam-result">
             <h1>Your Exam Results</h1>
-            <img src="assets/success.gif" alt="Success GIF" class="success-gif" style="display: none;">
-            <img src="assets/failed.gif" alt="Failure GIF" class="failed-gif" style="display: none;">
+            <img src="assets/success.png" alt="Success" class="success-gif" style="display: none;">
+            <img src="assets/failed.png" alt="Failure" class="failed-gif" style="display: none;">
         </div>
-        
+
         <div class="details">
             <p>Thank you for completing the exam! Here are your results:</p>
+            <div id="graph">
+                <canvas width="700" height="400" id="CNV"></canvas>
+            </div>
             <ul id="resultsList">
                 <!-- Risultati qui -->
             </ul>
@@ -50,7 +53,7 @@
         scoreParagraph.innerHTML = `<strong>Your Score:</strong> ${finalScore} / ${answers.length}`;
         scoreParagraph.style.fontSize = "20px";
         scoreParagraph.style.marginBottom = "20px";
-        scoreParagraph.style.color = "blue";
+        scoreParagraph.style.color = "white";
         resultsList.parentNode.insertBefore(scoreParagraph, resultsList);
 
         answers.forEach(answer => {
@@ -70,7 +73,48 @@
   `;
 
             resultsList.appendChild(li);
+            var T = [
+                { nome: "Correct Answers", num: 222, col: "green" },
+                { nome: "Wrong Answers", num: 563, col: "red" },
+            ];
+            T[0].num = parseInt(finalScore);
+            T[1].num = answers.length - parseInt(finalScore);
+            var ctx = CNV.getContext("2d");
+            var tot = 0, i;
+
+            //calcolo il totale
+            for (i = 0; i < T.length; i++)tot += T[i].num;
+
+            //faccio il grafico
+            var ang = 0;
+            for (i = 0; i < T.length; i++) {
+                var delta = T[i].num / tot * 2 * Math.PI;
+                ctx.beginPath();
+                ctx.arc(300, 200, 150, ang, ang + delta);
+                ctx.strokeStyle = "white";
+                ctx.lineWidth = 4;
+                ctx.stroke();
+                ang += delta;
+                ctx.lineTo(300, 200);
+                ctx.fillStyle = T[i].col;
+                ctx.fill();
+            }//fine for
+
+            //faccio la legenda
+            var x = 400, y = 40;
+            ctx.font = "16px Inter, sans-serif";
+            ctx.fontWeight = "normal";
+
+            for (i = 0; i < T.length; i++) {
+                ctx.fillStyle = 'white';
+                ctx.fillText(T[i].nome, x + 20, y);
+                ctx.fillStyle = T[i].col;
+                ctx.fillRect(x, y - 10, 10, 10)
+                y += 20;
+            }//fine for
         });
+
+
 
     </script>
     <script src="script.js"></script>

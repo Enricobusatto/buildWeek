@@ -71,10 +71,13 @@ h1 {
 
 #next-question {
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
 }
 
 #next-button {
+    width: 250px;
     font-family: "Outfit", sans-serif;
     padding: 0.8rem 3.3rem;
     background: #00FFFF;
@@ -136,7 +139,7 @@ h1 {
     border-radius: 50%;
     border: 10px solid lightgray;
     border-top: 10px solid green;
-    animation: countdown-animation 30s linear forwards;
+    animation: countdown-animation 31s linear forwards;
 }
 
 @keyframes countdown-animation {

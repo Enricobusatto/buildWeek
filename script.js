@@ -143,6 +143,58 @@ function initQuiz() {
 
   function loadRandomQuestion() {
 
+    let warning = document.getElementById("select-answer");
+    warning.style.display = "none";
+
+    
+
+    clearInterval(countdown); // Ferma il vecchio timer
+
+    countdownDuration = 30; // Riparti da 30 secondi
+    countdownText.textContent = countdownDuration;
+
+    countdown = setInterval(function () {
+      // Animazione cambio colore cerchio
+      const animation = document.getElementById('animTimer');
+      console.log(countdownDuration)
+      
+      if (countdownDuration > 0) {
+        countdownText.textContent = countdownDuration;
+        countdownDuration--;
+      } else {
+        clearInterval(countdown);
+        
+        userAnswers.push({
+          question: currentQuestion.question,
+          correctAnswer: currentQuestion.correct_answer,
+          selectedAnswer: "No answer",
+          isCorrect: false
+        });
+
+        questionsAnswered++;
+
+        if (questionsAnswered >= maxQuestions) {
+          localStorage.setItem("quizResults", JSON.stringify(userAnswers));
+          localStorage.setItem("finalScore", score);
+          window.location.href = "index3.html";
+          return;
+        }
+
+        loadRandomQuestion();
+      }
+
+      if (countdownText.textContent >= 11 && countdownText.textContent <= 15) {
+        animation.style.borderTopColor = "orange";
+      } else if (countdownText.textContent <= 10) {
+        animation.style.borderTopColor = "red";
+      } else {
+        animation.style.borderTopColor = "green";
+      }
+
+    }, 1000);
+
+
+
     // Queste 4 righe qui sotto che riguardano il refresh dell'animazione del cerchio (la rotazione) le ho spostato qui dentro
     // in modo che l animazione riparte sia quando il timer finisce che quando si preme il pulsante per andare avanti con le domande.
     const animation = document.getElementById('animTimer');
@@ -203,48 +255,7 @@ function initQuiz() {
       }
     });
 
-    clearInterval(countdown); // Ferma il vecchio timer
-
-    countdownDuration = 30; // Riparti da 30 secondi
-
-    countdown = setInterval(function () {
-      if (countdownDuration > -1) {
-        countdownText.textContent = countdownDuration;
-        countdownDuration--;
-      } else {
-        clearInterval(countdown);
-
-        userAnswers.push({
-          question: currentQuestion.question,
-          correctAnswer: currentQuestion.correct_answer,
-          selectedAnswer: "No answer",
-          isCorrect: false
-        });
-
-        questionsAnswered++;
-
-        if (questionsAnswered >= maxQuestions) {
-          localStorage.setItem("quizResults", JSON.stringify(userAnswers));
-          localStorage.setItem("finalScore", score);
-          window.location.href = "index3.html";
-          return;
-        }
-
-        loadRandomQuestion();
-      }
-
-      // Animazione cambio colore cerchio
-      const animation = document.getElementById('animTimer');
-
-      if (countdownDuration >= 10 && countdownDuration <= 14) {
-        animation.style.borderTopColor = "orange";
-      } else if (countdownDuration <= 10) {
-        animation.style.borderTopColor = "red";
-      } else {
-        animation.style.borderTopColor = "green";
-      }
-
-    }, 1000);
+    
   }
 
   //funzione per aggiungere la classe selected al pulsante cliccato
@@ -255,8 +266,10 @@ function initQuiz() {
   }
   //funzione per il click del pulsante next e per controllare se è stata selezionata la risposta corretta
   function nextQuestion() {
+    let warning = document.getElementById("select-answer");
+    warning.style.display = "none";
     if (!selectedAnswer) {
-      alert("Seleziona una risposta prima di continuare!");
+      warning.style.display = "block";
       return;
     }
 
