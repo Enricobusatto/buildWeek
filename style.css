@@ -39,6 +39,15 @@ h1 {
     line-height: 0.8;
 }
 
+#exam-result{
+    display: flex;
+    justify-content: space-between;
+}
+
+#exam-result img {
+    width: 200px;
+}
+
 h2 {
     font-family: "Outfit", sans-serif;
     font-size: 30px;

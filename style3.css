@@ -15,7 +15,6 @@ strong {
     margin-top: 40px;
     margin-left: 80px;
     margin-right: 80px;
-    text-align: center;
 }
 
 .logo {
@@ -28,11 +27,20 @@ strong {
 
 h1 {
     font-family: "Outfit", sans-serif;
-    font-size: 50px;
+    font-size: 60px;
     color: white;
     font-weight: 400;
-    margin-bottom: 30px;
-    line-height: 1.2;
+    margin-bottom: 40px;
+    line-height: 0.8;
+}
+
+#exam-result{
+    display: flex;
+    justify-content: space-between;
+}
+
+#exam-result img {
+    width: 200px;
 }
 
 .details p {

@@ -130,7 +130,7 @@ function initQuiz() {
   const maxQuestions = 10;
   let userAnswers = [] // array che memorizza le risposte date 
   let remainingQuestions = [...questions]; // copia modificabile 
-  let countdown 
+  let countdown
 
   const answerButtons = [
     document.getElementById("answer1"),
@@ -170,7 +170,13 @@ function initQuiz() {
     //contatore domande
     document.getElementById("question-number").textContent = `Question ${questionsAnswered + 1} / ${maxQuestions}`;
 
-
+    // cambia il testo del bottone se siamo all'ultima domanda
+    const nextButton = document.getElementById("next-button");
+    if (questionsAnswered === maxQuestions - 1) {
+      nextButton.textContent = "SUBMIT EXAM";
+    } else {
+      nextButton.textContent = "NEXT QUESTION";
+    }
 
     //seleziona una domanda casuale
     let randomPick = Math.floor(Math.random() * remainingQuestions.length);
@@ -182,7 +188,7 @@ function initQuiz() {
     //funzione per mescolare le risposte
     const allAnswers = [currentQuestion.correct_answer, ...currentQuestion.incorrect_answers];
     const shuffledAnswers = allAnswers.sort(() => Math.random() - 0.5);
-    
+
     //funzione per mostrare le risposte se 2 o 4 pulsanti
 
     answerButtons.forEach((btn, i) => {
@@ -199,47 +205,46 @@ function initQuiz() {
 
     clearInterval(countdown); // Ferma il vecchio timer
 
-countdownDuration = 30; // Riparti da 30 secondi
+    countdownDuration = 30; // Riparti da 30 secondi
 
-countdown = setInterval(function () {
-  if (countdownDuration > -1) {
-    countdownText.textContent = countdownDuration;
-    countdownDuration--;
-  } else {
-    clearInterval(countdown);
+    countdown = setInterval(function () {
+      if (countdownDuration > -1) {
+        countdownText.textContent = countdownDuration;
+        countdownDuration--;
+      } else {
+        clearInterval(countdown);
 
-    userAnswers.push({
-      question: currentQuestion.question,
-      correctAnswer: currentQuestion.correct_answer,
-      selectedAnswer: "No answer",
-      isCorrect: false
-    });
+        userAnswers.push({
+          question: currentQuestion.question,
+          correctAnswer: currentQuestion.correct_answer,
+          selectedAnswer: "No answer",
+          isCorrect: false
+        });
 
-    questionsAnswered++;
+        questionsAnswered++;
 
-    if (questionsAnswered >= maxQuestions) {
-      localStorage.setItem("quizResults", JSON.stringify(userAnswers));
-      localStorage.setItem("finalScore", score);
-      window.location.href = "index3.html";
-      return;
-    }
+        if (questionsAnswered >= maxQuestions) {
+          localStorage.setItem("quizResults", JSON.stringify(userAnswers));
+          localStorage.setItem("finalScore", score);
+          window.location.href = "index3.html";
+          return;
+        }
 
-    loadRandomQuestion();
-  }
+        loadRandomQuestion();
+      }
 
-  // Animazione cambio colore cerchio
-  const animation = document.getElementById('animTimer');
+      // Animazione cambio colore cerchio
+      const animation = document.getElementById('animTimer');
 
-  if (countdownDuration > 10 && countdownDuration < 15) {
-    animation.style.borderTopColor = "orange";
-  } else if (countdownDuration < 10) {
-    animation.style.borderTopColor = "red";
-  } else {
-    animation.style.borderTopColor = "green";
-  }
+      if (countdownDuration >= 10 && countdownDuration <= 14) {
+        animation.style.borderTopColor = "orange";
+      } else if (countdownDuration <= 10) {
+        animation.style.borderTopColor = "red";
+      } else {
+        animation.style.borderTopColor = "green";
+      }
 
-}, 1000);
-
+    }, 1000);
   }
 
   //funzione per aggiungere la classe selected al pulsante cliccato
@@ -270,9 +275,6 @@ countdown = setInterval(function () {
 
     countdownDuration = 30
     loadRandomQuestion();
-
-
-
 
   }
   //fa caricare la pagina e poi fa partire il quiz
