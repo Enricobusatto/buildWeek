@@ -215,10 +215,6 @@ function initQuiz() {
 
     countdownDuration = 30
     loadRandomQuestion();
-
-
-
-
   }
   //fa caricare la pagina e poi fa partire il quiz
   window.addEventListener("DOMContentLoaded", loadRandomQuestion);
