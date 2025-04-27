@@ -7,7 +7,7 @@ if (currentPage.includes("index.html")) {
 
 if (currentPage.includes("index2.html")) {
   // Codice per la pagina 2
-  initQuiz();
+  initQuiz(); 
 }*/
 
 const questions = [
