@@ -121,6 +121,11 @@ if (currentPage.includes("index2.html")) {
   initQuiz();
 }
 
+if (currentPage.includes("index3.html")) {
+  // Codice per la pagina 3
+  showFinalScore();
+}
+
 //prova
 function initQuiz() {
   let score = 0;
@@ -366,41 +371,88 @@ function welcomePage() {
   //checkbox.addEventListener("change", attivaBottone);
   proceed.addEventListener("click", vaiNextPagina);
 
-
-
-  //fare funzione punteggio finale showFinalScore() quindi collegamento con terza pagina html (nello score registriamo il punteggio finale)
-
-
-
-
-
-
-
-
-
-
-  // //funzione per mescolare le domande
-  // function fisherYates(domande) {
-  //   for (let i = domande.length - 1; i > 0; i--) {
-  //     const j = Math.floor(Math.random() * (i + 1));
-  //     [domande[i], domande[j]] = [domande[j], domande[i]];
-  //   }
-  //   return domande;
-  // }
-
-  // let domandeMischiate = fisherYates(questions);
-  // console.log(domandeMischiate);
-
-  // function preparaRisposte(domanda) {
-  //   return fisherYates([
-  //     ...domanda.incorrect_answers,
-  //     domanda.correct_answer
-  //   ])
-  // }
-
-  // console.log(preparaRisposte(questions[0]))
-
-
 }
+
+//fare funzione punteggio finale showFinalScore() quindi collegamento con terza pagina html (nello score registriamo il punteggio finale)
+
+function showFinalScore(){
+  let answers = JSON.parse(localStorage.getItem("quizResults"));
+        let finalScore = localStorage.getItem("finalScore");
+
+        if (finalScore > 5) {
+            document.querySelector(".success-gif").style.display = "block";
+        } else {
+            document.querySelector(".failed-gif").style.display = "block";
+        }
+        console.log(answers);
+
+        const resultsList = document.getElementById("resultsList");
+
+        // Mostra il punteggio finale sopra la lista
+        const scoreParagraph = document.createElement("p");
+        scoreParagraph.innerHTML = `<strong>Your Score:</strong> ${finalScore} / ${answers.length}`;
+        scoreParagraph.style.fontSize = "20px";
+        scoreParagraph.style.marginBottom = "20px";
+        scoreParagraph.style.color = "white";
+        resultsList.parentNode.insertBefore(scoreParagraph, resultsList);
+
+        answers.forEach(answer => {
+            const li = document.createElement("li");
+
+            const isCorrect = answer.isCorrect;
+
+            // Spunta verde o X rossa in base alla risposta
+            const resultIcon = isCorrect ? '✅' : '❌';
+            const resultColor = isCorrect ? 'green' : 'red';
+
+            li.innerHTML = `
+    ${resultIcon}<strong>Question:</strong> ${answer.question}<br>
+    <strong>Your Answer:</strong> <span style="color: ${isCorrect ? 'green' : 'red'};">${answer.selectedAnswer}</span><br><br>
+    <strong>Correct Answer:</strong> <span style="color: green;">${answer.correctAnswer}</span><br>
+    <hr>
+  `;
+
+            resultsList.appendChild(li);
+            var T = [
+                { nome: "Correct Answers", num: 222, col: "green" },
+                { nome: "Wrong Answers", num: 563, col: "red" },
+            ];
+            T[0].num = parseInt(finalScore);
+            T[1].num = answers.length - parseInt(finalScore);
+            var ctx = CNV.getContext("2d");
+            var tot = 0, i;
+
+            //calcolo il totale
+            for (i = 0; i < T.length; i++)tot += T[i].num;
+
+            //faccio il grafico
+            var ang = 0;
+            for (i = 0; i < T.length; i++) {
+                var delta = T[i].num / tot * 2 * Math.PI;
+                ctx.beginPath();
+                ctx.arc(300, 200, 150, ang, ang + delta);
+                ctx.strokeStyle = "white";
+                ctx.lineWidth = 4;
+                ctx.stroke();
+                ang += delta;
+                ctx.lineTo(300, 200);
+                ctx.fillStyle = T[i].col;
+                ctx.fill();
+            }//fine for
+
+            //faccio la legenda
+            var x = 400, y = 40;
+            ctx.font = "16px Inter, sans-serif";
+            ctx.fontWeight = "normal";
+
+            for (i = 0; i < T.length; i++) {
+                ctx.fillStyle = 'white';
+                ctx.fillText(T[i].nome, x + 20, y);
+                ctx.fillStyle = T[i].col;
+                ctx.fillRect(x, y - 10, 10, 10)
+                y += 20;
+            }//fine for
+        });
+      }
 
 
