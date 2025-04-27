@@ -128,7 +128,9 @@ function initQuiz() {
   let currentQuestion = null;
   let selectedAnswer = null;
   const maxQuestions = 10;
+  let userAnswers = [] // array che memorizza le risposte date 
   let remainingQuestions = [...questions]; // copia modificabile 
+  let countdown
 
   const answerButtons = [
     document.getElementById("answer1"),
@@ -140,6 +142,58 @@ function initQuiz() {
   //funzione per mostrare il punteggio finale
 
   function loadRandomQuestion() {
+
+    let warning = document.getElementById("select-answer");
+    warning.style.display = "none";
+
+    
+
+    clearInterval(countdown); // Ferma il vecchio timer
+
+    countdownDuration = 30; // Riparti da 30 secondi
+    countdownText.textContent = countdownDuration;
+
+    countdown = setInterval(function () {
+      // Animazione cambio colore cerchio
+      const animation = document.getElementById('animTimer');
+      console.log(countdownDuration)
+      
+      if (countdownDuration > 0) {
+        countdownText.textContent = countdownDuration;
+        countdownDuration--;
+      } else {
+        clearInterval(countdown);
+        
+        userAnswers.push({
+          question: currentQuestion.question,
+          correctAnswer: currentQuestion.correct_answer,
+          selectedAnswer: "No answer",
+          isCorrect: false
+        });
+
+        questionsAnswered++;
+
+        if (questionsAnswered >= maxQuestions) {
+          localStorage.setItem("quizResults", JSON.stringify(userAnswers));
+          localStorage.setItem("finalScore", score);
+          window.location.href = "index3.html";
+          return;
+        }
+
+        loadRandomQuestion();
+      }
+
+      if (countdownText.textContent >= 11 && countdownText.textContent <= 15) {
+        animation.style.borderTopColor = "orange";
+      } else if (countdownText.textContent <= 10) {
+        animation.style.borderTopColor = "red";
+      } else {
+        animation.style.borderTopColor = "green";
+      }
+
+    }, 1000);
+
+
 
     // Queste 4 righe qui sotto che riguardano il refresh dell'animazione del cerchio (la rotazione) le ho spostato qui dentro
     // in modo che l animazione riparte sia quando il timer finisce che quando si preme il pulsante per andare avanti con le domande.
@@ -157,7 +211,9 @@ function initQuiz() {
 
 
     if (questionsAnswered >= maxQuestions) {
-      showFinalScore();  //DA FARE ********
+      localStorage.setItem("quizResults", JSON.stringify(userAnswers)); // salva array come stringa JSON (perceh local storage non acceta altro che stringhe)
+      localStorage.setItem("finalScore", score); // salva il punteggio
+      window.location.href = "index3.html"; // vai alla pagina dei risultati
       return;
     }
     selectedAnswer = null;
@@ -166,7 +222,13 @@ function initQuiz() {
     //contatore domande
     document.getElementById("question-number").textContent = `Question ${questionsAnswered + 1} / ${maxQuestions}`;
 
-
+    // cambia il testo del bottone se siamo all'ultima domanda
+    const nextButton = document.getElementById("next-button");
+    if (questionsAnswered === maxQuestions - 1) {
+      nextButton.textContent = "SUBMIT EXAM";
+    } else {
+      nextButton.textContent = "NEXT QUESTION";
+    }
 
     //seleziona una domanda casuale
     let randomPick = Math.floor(Math.random() * remainingQuestions.length);
@@ -192,6 +254,8 @@ function initQuiz() {
         btn.onclick = null;
       }
     });
+
+    
   }
 
   //funzione per aggiungere la classe selected al pulsante cliccato
@@ -202,22 +266,28 @@ function initQuiz() {
   }
   //funzione per il click del pulsante next e per controllare se è stata selezionata la risposta corretta
   function nextQuestion() {
+    let warning = document.getElementById("select-answer");
+    warning.style.display = "none";
     if (!selectedAnswer) {
-      alert("Seleziona una risposta prima di continuare!");
+      warning.style.display = "block";
       return;
     }
 
     if (selectedAnswer === currentQuestion.correct_answer) {
       score++;
     }
+    // di seguito la funzione per fa si che quando clicchi su next, salvi una risposta nell'array 
+    userAnswers.push({
+      question: currentQuestion.question,
+      correctAnswer: currentQuestion.correct_answer,
+      selectedAnswer: selectedAnswer,
+      isCorrect: selectedAnswer === currentQuestion.correct_answer
+    })
 
     questionsAnswered++;
 
     countdownDuration = 30
     loadRandomQuestion();
-
-
-
 
   }
   //fa caricare la pagina e poi fa partire il quiz
@@ -228,7 +298,7 @@ function initQuiz() {
   //Script per animazione timer
   let countdownDuration = 30
   const countdownText = document.getElementById("countdown-text");
-  let countdown = setInterval(function () {
+  /*let countdown = setInterval(function () {
     if (countdownDuration > -1) {
       countdownText.textContent = countdownDuration;
       countdownDuration--;
@@ -239,6 +309,14 @@ function initQuiz() {
 
     }
     if (countdownDuration == -1) {
+     
+      userAnswers.push({
+        question: currentQuestion.question,
+        correctAnswer: currentQuestion.correct_answer,
+        selectedAnswer: "No answer",  
+        isCorrect: false
+      })
+      
       countdownDuration = 30
       questionsAnswered++;
       loadRandomQuestion();
@@ -256,7 +334,7 @@ function initQuiz() {
       animation.style.borderTopColor = "green"
     }
 
-  }, 1000);
+  }, 1000);*/
 
 }
 
